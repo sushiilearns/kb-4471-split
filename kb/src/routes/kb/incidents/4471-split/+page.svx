@@ -1,0 +1,82 @@
+---
+layout: runbook
+title: '#4471 · what the reports show'
+owner: sushiilearns
+status: proposed
+reviewed: 2026-11-01
+signature: sushiilearns
+---
+
+<script>
+  import ProblemSplit from '#lib/kb/ProblemSplit.svelte';
+  import SubjectProof from '#lib/kb/SubjectProof.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) says one issue, one fix queued, and is marked known. The desk's own
+cause rule disagrees with that page: run over the same reports, it sorts them into more than one
+cause. Another problem is sitting in the desk's own notes, counted as a footnote.
+
+<Callout kind="warn">
+Not known. These reports describe more than one problem, and only one of them has a ticket or a
+queued fix. The others were merged into this ticket and will not be fixed by its fix.
+</Callout>
+
+## What is in #4471
+
+<ProblemSplit ticket={4471} />
+
+Each row is a different bug with a different fix. The parser row is one change in one shared
+place. The hint row is a change to one booking form, and the parser fix will not touch it: those
+people are typing month-first because the form told them to, and the form is reading them
+day-first. The one-day row is not a month flip at all.
+
+## Why one ticket swallowed them
+
+[Decision 0001](/kb/decisions/0001-dedupe-by-subject) merges a report into an open ticket when its
+subject line matches, lowercased and stripped of punctuation. Nobody reads the body. During an
+incident morning that is the right trade, and the desk made it deliberately.
+
+It cannot separate these problems, because the cause is not in the subject. The cause follows from
+the tenant's locale and the booking form they run, and a reporter types neither. Two people can
+write the same sentence and be hitting different bugs. The desk's own argued pairs show it:
+
+<SubjectProof />
+
+Decision 0001 predicted this: "Reports with different subjects about the same bug end up in
+separate tickets." The reverse happened too, and nothing in the rule can catch it.
+
+## Where the desk's table stops
+
+<CauseTable ticket={4471} />
+
+That table is not wrong. It counts the one-day reports under the cause their tenant implies and
+footnotes them, which is the written convention. But the footnote is the problem: those reports
+describe a date that moved by a single day, which neither the parser bug nor the hint bug can
+produce. A month flip moves 12 May to 5 December. These people are describing Tuesday showing as
+Monday, one client in Lisbon and one in Toronto getting different days for the same meeting, and an
+invite that arrived before the booking was made. That is a date rendered in the viewer's timezone
+from a timestamp, not a date parsed in the wrong order.
+
+## What each problem needs
+
+- `parser` — one change where dates are parsed, for every day-first tenant. This is the fix already
+  queued on #4471.
+- `hint` — change what booking-v3 prints under its date field, or change how that form reads it.
+  Needs its own ticket; the queued parser fix does not reach it.
+- `one-day` — needs a diagnosis before a fix. Start with how a stored date is turned into a day for
+  display, and for whom.
+
+## Before you rely on this page
+
+- The one-day group is the desk's own list in `desk-notes.json`, read from the report bodies. If
+  more reports describe a one-day move under a different subject, they are still counted under
+  their tenant's cause here, and this page undercounts the group.
+- `hint` and `parser` come from the desk's rule in `causes.ts`, not from my reading. If that rule
+  is wrong about a tenant's form, these counts move with it.
+- Nothing here was checked against the live queue. The export is from 4 October and the desk has
+  kept working.
+
+<RenderStamp {signature} />
