@@ -40,7 +40,11 @@ invite that arrived before the booking was made. That is a date rendered in the 
 from a timestamp, not a date parsed in the wrong order.</p> <h2>What each problem needs</h2> <ul><li><code>parser</code> — one change where dates are parsed, for every day-first tenant. This is the fix already
 queued on #4471.</li> <li><code>hint</code> — change what booking-v3 prints under its date field, or change how that form reads it.
 Needs its own ticket; the queued parser fix does not reach it.</li> <li><code>one-day</code> — needs a diagnosis before a fix. Start with how a stored date is turned into a day for
-display, and for whom.</li></ul> <h2>Before you rely on this page</h2> <ul><li>The one-day group is the desk’s own list in <code>desk-notes.json</code>, read from the report bodies. If
+display, and for whom.</li></ul> <h2>Tickets filed</h2> <p>One ticket per problem, in <a href="https://github.com/sushiilearns/kb-4471-split" rel="nofollow">sushiilearns/kb-4471-split</a>. Each one states the
+reports it covers and how they were counted.</p> <ul><li><a href="https://github.com/sushiilearns/kb-4471-split/issues/1" rel="nofollow"><code>parser</code></a> — the fix already queued on
+#4471 is this one, and only this one.</li> <li><a href="https://github.com/sushiilearns/kb-4471-split/issues/2" rel="nofollow"><code>hint</code></a> — no fix queued. The parser fix
+does not reach it.</li> <li><a href="https://github.com/sushiilearns/kb-4471-split/issues/3" rel="nofollow"><code>one-day</code></a> — no fix queued, and no
+diagnosis yet.</li></ul> <h2>Before you rely on this page</h2> <ul><li>The one-day group is the desk’s own list in <code>desk-notes.json</code>, read from the report bodies. If
 more reports describe a one-day move under a different subject, they are still counted under
 their tenant’s cause here, and this page undercounts the group.</li> <li><code>hint</code> and <code>parser</code> come from the desk’s rule in <code>causes.ts</code>, not from my reading. If that rule
 is wrong about a tenant’s form, these counts move with it.</li> <li>Nothing here was checked against the live queue. The export is from 4 October and the desk has

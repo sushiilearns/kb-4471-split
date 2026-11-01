@@ -69,6 +69,19 @@ from a timestamp, not a date parsed in the wrong order.
 - `one-day` — needs a diagnosis before a fix. Start with how a stored date is turned into a day for
   display, and for whom.
 
+## Tickets filed
+
+One ticket per problem, in
+[sushiilearns/kb-4471-split](https://github.com/sushiilearns/kb-4471-split). Each one states the
+reports it covers and how they were counted.
+
+- [`parser`](https://github.com/sushiilearns/kb-4471-split/issues/1) — the fix already queued on
+  #4471 is this one, and only this one.
+- [`hint`](https://github.com/sushiilearns/kb-4471-split/issues/2) — no fix queued. The parser fix
+  does not reach it.
+- [`one-day`](https://github.com/sushiilearns/kb-4471-split/issues/3) — no fix queued, and no
+  diagnosis yet.
+
 ## Before you rely on this page
 
 - The one-day group is the desk's own list in `desk-notes.json`, read from the report bodies. If
