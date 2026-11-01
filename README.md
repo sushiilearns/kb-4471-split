@@ -16,6 +16,22 @@ This repo holds the tickets and the knowledge-base page that argues the split.
 
 412 reports, counted once each. The export holds 427 rows and repeats 15 of them.
 
+## What the desk did
+
+#4471 closed on 5 October, after these tickets were filed:
+
+| problem | outcome | ticket |
+|---|---|---|
+| `parser` | fixed, by `fix(dates): parse dd/mm for eu locales` | issue 1, closed as completed |
+| `hint` | won't fix — booking-v3 was retired | issue 2, closed as not planned |
+| `one-day` | not mentioned | **issue 3, still open** |
+
+Two resolutions and a gap. The `one-day` reports were merged into #4471, #4471 is closed, and
+nobody has examined what they describe. That ticket stays open for the same reason it was filed.
+
+Worth noting what the shape of the outcome says: the desk needed two different answers for one
+ticket, a fix and a withdrawal. A ticket that needs two answers was two tickets.
+
 ## What is here
 
 ```
